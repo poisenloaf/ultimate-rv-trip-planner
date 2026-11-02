@@ -1,16 +1,20 @@
 ---
 name: RV trip board spec
-description: "Use whenever building or updating an RV trip board HTML page: layout, statuses, colors, map, day table and settings table."
-template_version: 7
+description: >-
+  Use when building or updating an RV trip board HTML page: layout, statuses,
+  colors, map, Go/No-Go strip, day table and settings table. Not for planning
+  steps or Go/No-Go checks.
+template_version: 8
 ---
-
 ## Trip board page spec
 
 This skill is the only board spec. The RV trip planning skill points here. Follow it exactly.
 
-**File.** One self-contained HTML file per trip. Leaflet CSS and JS go inline. Simplify route lines so the page loads fast. Load nothing from outside except map tiles.
+**File.** One self-contained HTML file per trip. Leaflet CSS and JS go inline. Simplify route lines so the page loads fast. Load nothing from outside except map tiles. Pin the Leaflet version you inline (1.9.x) and note it in an HTML comment.
 
-**Map tiles.** Use `https://tile.openstreetmap.org/{z}/{x}/{y}.png` (no `{s}` subdomains). Show the attribution "© OpenStreetMap contributors" with a link to https://www.openstreetmap.org/copyright. Keep use light, per the OSM tile policy. Tiles can be blocked when the page opens from a local `file://` path or in some preview panes, because no Referer is sent. Test the board that way. Fallback: if tiles fail, still draw the route lines, stops and legend on a plain background, and show a small note: "Map tiles didn't load. Route and stops are still shown." A user may also supply their own tile provider and key (store it like other keys).
+**Map tiles.** Use `https://tile.openstreetmap.org/{z}/{x}/{y}.png` (no `{s}` subdomains). Show the attribution "© OpenStreetMap contributors" with a link to https://www.openstreetmap.org/copyright. Keep use light, per the OSM tile policy. Tiles can be blocked when the page opens from a local `file://` path or in some preview panes, because no Referer is sent. Test the board that way. Fallback: if tiles fail, still draw the route lines, stops and legend on a plain background, and show a small note: "Map tiles didn't load. Route and stops are still shown." Before you show a board, open it once from `file://` and confirm that tiles load or the fallback note shows. A user may also supply their own tile provider and key (store it like other keys; never print it).
+
+**Privacy.** A board shared outside the owner (screenshots, posts, template demos) uses sample stops and dates, never real stays, dates or locations of the travelers.
 
 **Layout:** header, map, Go/No-Go strip, day table, sources footnote, Settings. Full width; fits about 1000px with no hidden columns. Bg `#f7f6f2`, cards `#fff`, lines `#e4e2dc`, text `#1f2933`, muted `#6b7280`, accent `#2f6fb5`. System font, 15px/1.45. Table 13px, sub text 11.5px.
 

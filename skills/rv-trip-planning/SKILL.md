@@ -1,7 +1,8 @@
 ---
 name: RV trip planning
-description: "Use when planning a multi-day RV trip: paced legs, rig-safe routing, overnight stops by the user's ranked memberships, live availability, fuel/dump/weather, a trip board, inquiry drafts, and booking tee-up that stops before anything commits or charges."
-template_version: 7
+description: >-
+  Use when planning a multi-day RV trip: paced legs, rig-safe routing, overnight stops by the owner's ranked memberships, live availability, fuel/dump/weather, a trip board, inquiry drafts, and booking tee-up that stops before anything commits or charges. Not for single-site availability watchers or non-RV travel.
+template_version: 8
 ---
 
 # RV trip planning
@@ -86,7 +87,7 @@ Optional Google Sheets export once settled. Mirror the layout of the past-stays 
 Use a real router, never straight-line guesses. Always ask which routing service to use before the first route, and save it. Show the choices:
 1. **OSRM** (no signup): car-only, so height, weight and propane are ignored. The public demo server is for light use only (about 1 request per second, no heavy use). Cache results.
 2. **OpenRouteService**: free signup, no card. Truck profile with height and weight. Daily limits apply.
-3. **HERE**: truck routing with height, weight, length and axles. Needs an account and a card on file, even on the free plan. Has no spending cap. Free-tier limits as of 2026-10; check current terms.
+3. **HERE**: truck routing with height, weight, length and axles. Needs an account and a card on file, even on the free plan. Has no spending cap. Free-tier limits as of 2026-10; re-check terms if that is older than 90 days.
 
 Mileage margin (one rule, used everywhere): with a car-only router (OSRM), add 5% to routed miles and drive time, and flag legs that leave the interstate. With a truck router, use the routed numbers as is.
 
@@ -114,6 +115,10 @@ Pick stays in the owner's ranked membership order from settings. Within and afte
 Up to 3 options per night. One strong verified option beats three stale listings. Research order per night: membership directories → public parks → private parks.
 
 Home and street hosts (driveways, street parking): check the city's posted oversize-vehicle parking rules (some ban large vehicles on posted streets overnight) and the host's rules. Line up a backup.
+
+## Privacy
+
+Boards, screenshots and reviews shared outside the owner never show the travelers' real stays, dates or locations unless the owner says so for that item. Use sample data for demos.
 
 ## Past stays
 
@@ -182,37 +187,8 @@ All on by default. The user can turn any item off or add their own at the first 
 5. After-hours check-in: how does it work if the office is closed?
 6. Cancellation policy.
 
-### Self-built caller: Twilio + xAI Grok realtime voice — Advanced (technical users)
-Only if the owner wants it, can run code, and sets up their own accounts. Everyone else: use a hosted service or call sheets.
-- **Needs:** the owner's own Twilio account and a voice-capable number, plus an xAI API key with credit. An X Premium subscription does not include API access. Store keys as described under Secrets.
-- **Trial accounts:** a Twilio trial account can only call verified numbers and plays a trial notice. The test call to the owner's own phone works on a trial. Calling parks needs an upgraded (funded) account.
-- **How it works:**
-  - Twilio places the outbound call with a `TimeLimit` of about 6 minutes (360 seconds). The TwiML uses `<Connect><Stream>`, a bidirectional Media Stream (μ-law, 8 kHz).
-  - A small websocket bridge on the bot's computer relays the audio to xAI's realtime voice model. Use the current model from xAI's docs (the `grok-voice-latest` alias tracks the newest). Set μ-law 8 kHz for both input and output if the API supports it; otherwise transcode.
-  - The bridge relays audio only. It never saves audio. The transcript comes from the model's transcription events.
-  - Opening: the model waits for the office, then gives the disclosure line from Call style.
-  - Phone menus: the model waits for the whole menu, then presses the key for reservations or the office. Keys are sent as in-band DTMF tones on the media stream. If that fails, end the call and make a call sheet.
-  - Answering machine detection (Twilio async AMD) is a hint only. Business greetings and menus often score as "machine". The model decides from a clear beep or "leave a message" prompt.
-  - Time limit: the bridge starts a polite wrap-up at about 5:15. Twilio's `TimeLimit` ends the call at about 6:00 as a backstop.
-  - The model gets tools: `wait_silently` (stay quiet while staff look things up), `send_dtmf` (press keys), `end_call` (hang up through the Twilio API), and `voicemail_detected`.
-  - A public HTTPS tunnel exposes the bridge. Some sandboxes only allow outbound port 443, so Cloudflare quick tunnels (port 7844) may fail. An SSH-over-443 tunnel such as Pinggy works. Free tunnels may expire after about an hour, which is fine for one call.
-  - After the call, a text model pulls the structured answers (availability, prices, discounts, other answers) out of the transcript.
-  - Put the website facts in a per-call facts file, so the caller never asks what's posted.
-- **Security:**
-  - Validate the `X-Twilio-Signature` header on every webhook.
-  - Give each call a random token on its callback and stream URLs, and expire it when the call ends.
-  - Use a Twilio API key and secret, not the main account auth token, where possible.
-  - The tunnel provider ends the encryption at its end, so it can see the audio. Use a provider you trust.
-- **Cost** at US pay-as-you-go list prices, as of 2026-10-18 (check current pricing at https://www.twilio.com/en-us/voice/pricing/us and https://docs.x.ai/developers/pricing):
-  - Twilio outbound voice: $0.014/min
-  - Twilio Media Streams: $0.0044/min
-  - xAI realtime voice: $0.08/min, plus $0.004 per text input sent to the model
-  - Answering machine detection: $0.0075 per call
-  - Answer extraction: a fraction of a cent per call
-  - Total: about $0.10 a minute. A typical 2–3 minute call is about $0.21–$0.31. The 6-minute cap is about $0.61 at most. Show this maximum before each call.
-  - Plus the Twilio number fee (about $1.15 a month for a US local number).
-- **Caller ID:** calls from an individual Twilio account are usually signed with B attestation (SHAKEN/STIR). A attestation and Voice Integrity (spam-label cleanup with the carriers) need a registered Twilio business profile. Spam labels come mostly from carrier analytics, so a new number may still show "Spam Likely". Keep call volume low and expect some unanswered calls.
-- **First run:** always do a test call to the owner's own phone first, with their OK. The owner plays the park office.
+### Self-built caller: Twilio + xAI Grok realtime voice — Advanced
+Only if the owner wants it, can run code, and sets up their own accounts. Read `twilio-caller.md` in this skill's folder before any setup or call. Everyone else: use a hosted service or call sheets.
 
 ## Secrets
 
@@ -255,7 +231,7 @@ Offer a short review per stay (Harvest Hosts, Campendium, Google, etc.). First a
 
 ## Feedback
 
-After the first trip board is done, offer once to draft a short feedback email. Also offer whenever the user says "feedback", "bug" or "suggestion". Draft to rvtripplanner@agentmail.to. Subject: `Ultimate RV Trip Planner feedback (version <template version from the RV trip planner getting started skill>)`. Body: what worked, what broke or was confusing, and what they wish it did. Show it as a draft the user reviews and sends themselves; never send on your own. Leave out the user's name, contact details and trip details unless the user chooses to add them. Offer at most once after the first board, then only when asked.
+Follow "After the first board" in the RV trip planner getting started skill (draft only; the owner sends).
 
 ## Pipeline
 
@@ -286,6 +262,9 @@ After the first trip board is done, offer once to draft a short feedback email. 
 - Parks with no official site length treated as fine
 - Parks quietly converted to worker housing
 - Reloading a filled login page
+- Clicking review buttons (Helpful etc.) while reading listings
+- Treating "longest rig reported" in reviews as the official length
+- Stale calendar banners in a past-stays sheet
 - Batching live carts that expire
 
 ## Done checklist

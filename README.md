@@ -7,7 +7,8 @@ Source of truth for the skills in the **Ultimate RV Trip Planner** Grok Bot temp
 - `CHANGELOG.md` — what changed in each version.
 
 ## Monthly update check
-Bots made from the template run a routine at 9 AM on the 1st of each month. It compares the installed skills' `template_version` with `VERSION` here. If this repo is newer, it updates only these four skills (never the owner's memories, boards, routines or other skills), asks first if the owner edited a skill, and says briefly what changed. If current, it stays quiet. The owner can say "turn off updates".
+Bots made from the template run a routine at 9 AM on the 1st of each month. It compares the "Template version: N" line in the installed getting-started skill with `VERSION` here. If this repo is newer, it updates only these four skills (plus helper files in their folders) (never the owner's memories, boards, routines or other skills), asks first if the owner edited a skill, and says briefly what changed. If current, it stays quiet. The owner can say "turn off updates".
 
 ## Feedback
 rvtripplanner@agentmail.to
+Bots made from v7 or earlier don't have this routine; re-import the template or ask the bot to add the "Monthly template update" routine from its getting-started skill.

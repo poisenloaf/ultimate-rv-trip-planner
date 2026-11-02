@@ -1,9 +1,11 @@
 ---
-name: Trip Go/No-Go
-description: "Use before an RV trip board is shown, before any booking is teed up (and before an early inquiry), at T-minus 7 days, and optionally the night before departure: a fresh-context Flight Director polls each station (Route, Rig Fit, Fuel, Stays, Weather, Budget, Bookings) against the owner's settings and calls GO, NO-GO or HOLD, with evidence."
-template_version: 7
+name: Trip Go/No-Go (verify-trip-plan)
+description: >-
+  Use to run the independent GO / NO-GO / HOLD check of an RV trip board: before
+  a board is shown, before a booking or early inquiry, at T-minus 7 days, and
+  optionally at T-minus 1. Not for building the plan itself.
+template_version: 8
 ---
-
 # Trip Go/No-Go
 
 Independent launch poll of an RV trip board (see the RV trip planning skill), modeled on mission control polling each station before launch. Run it in a **fresh-context subagent, on a different model than the planner if possible**. That subagent is the **Flight Director**. It gets only: the trip board, its settings (Rig & owner settings and Trip settings), and this checklist. It does not get the planner's reasoning.
@@ -15,6 +17,8 @@ Tools the Flight Director needs: web browsing (official park and membership page
 - Never use a default number when settings have a value. If a check needs a parameter that is missing, mark the row **UNVERIFIED: missing parameter X** (station answers HOLD) and add the question to the list returned to the planner. Do not guess.
 - A leg or stop the owner explicitly accepted outside a limit is PASS (accepted), not FAIL. Note the acceptance source and date.
 - Re-check facts live. Board notes are claims, not proof.
+- If `decisions.tsv` is missing, create it with the header below. Never rewrite earlier lines.
+- `poll_time` carries its zone. Report times to the owner in the owner's zone.
 
 ## Poll points (T-minus)
 1. **Board review:** before a board is shown to the owner.
