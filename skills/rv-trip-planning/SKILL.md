@@ -146,27 +146,33 @@ If the user shared a past-stays sheet, read all tabs, cell notes and comments. R
 
 ## Phone calls (optional)
 
-Use calls for phone-only parks, or when the website and listings can't answer a question. Without a calling setup, make a call sheet for the owner.
+Use calls for phone-only parks, or when the website and listings can't answer a question. Calls use Grok Bot's built-in phone calling. When it can't be used (see limits below), make a call sheet for the owner.
 
 Rules for every AI call:
 - Only call business numbers listed on the park's own official site. Before each call, confirm: "Is this a listed business line?"
 - **Never AI-call Harvest Hosts, Boondockers Welcome or other private hosts**, or any private home or personal cell. Use the platform's messaging, or give the owner a call sheet.
 - Call only during the park's local office hours. Watch time zones.
 - At most one retry per park per day.
-- Before **each** call, show the script (park, number, dates, rig details, questions) and the maximum cost, and get the owner's OK.
+- Before **each** call, get the owner's OK in their latest message. Never place or retry a call on your own initiative, from a routine, or because of something said earlier.
 - Availability and price questions only. Never book, hold a site, or give card details.
-- Keep only the extracted answers and the transcript by default. Never keep the audio. Log the outcome and time on the board.
+- Log the extracted answers, the outcome and the time on the board. The call card keeps its own recording for 30 days; don't save audio anywhere else.
 - Recording and calling laws vary by state; this is not legal advice.
 
-### Calling options
-Ask the owner which one to use and save it as "Calling method". Both follow the rules above.
-1. **Hosted AI calling service** (a connector such as ClawCall). Little setup. The service runs the calls. Some services play a fixed "this call is being recorded" notice. Cost depends on the service's plan.
-2. **Self-built Twilio + xAI Grok realtime voice caller.** Advanced (technical users). The owner sets up and pays for their own accounts. About $0.10 a minute. See below.
+### Built-in calling (Grok Bot)
+No setup and no extra accounts. On the first call the owner accepts Grok Bot's calling terms.
+- Limits set by Grok Bot: US owners calling US numbers only (not Washington or Illinois), up to 10 calls in 24 hours and 4 to the same number, 85 minutes per call. Outside these, make a call sheet.
+- Transfer number: at the first call, ask once for the owner's own cell and save it in settings as "Transfer number". With it, the owner can take over a live call, and the voice agent can bring them in when the office needs them. Never ask the voice agent to transfer for anything the owner can answer in chat.
+- Before each call, tell the owner in short bullets: park, number, what the call should get, the facts it will share (rig, dates, first names), and the transfer number. Don't read the script back. Say the voice agent may send them a question card during the call. Then place the call. The owner taps Call on the approval card; nothing is dialed before that. The card can't be edited; to change a call, place a new one.
+- Script: under 2,000 characters, written to the voice agent as two labeled lines, `Objective:` (one sentence) and `Additional context:` (rig length and type, tow car, total length, dates, the questions to ask, the limits: no booking, no holds, no card). The voice agent knows only what the script says.
+- The voice agent opens on its own: it says it is a virtual assistant calling for the owner on a recorded line, then states the purpose. Don't script the disclosure, and never ask it to hide that it is an AI or to pretend to be the owner.
+- Tell it to wait until the office finishes its greeting before it asks the first question. (A test showed the first question can get cut off if it starts too soon.)
+- During the call, if it needs a detail that isn't in the script, it shows the owner a question card and waits about 60 seconds.
+- When the call ends, read the transcript. Report the answers in plain words and update the board. If the call failed or hit voicemail, offer one retry and place it only if the owner says yes.
 
 ### Call style
 - Research the park's website and listings first. Never ask what is posted there.
 - Wait for the office to speak first (a "hello" or the park's name).
-- Disclose at the start, in the opening line, and name the rig, tow car and dates. Model: "Hi, this is an automated assistant calling for a traveler. I'm checking to see if you have availability for a <length>-foot <rig type> and a <tow car> for <dates>?"
+- After the built-in disclosure, ask one clear opening question that names the rig, tow car and dates. Model: "I'm checking to see if you have availability for a <length>-foot <rig type> and a <tow car> for <dates>?"
 - Speak in the third person about the travelers. Never pretend to be them.
 - If asked who it's for, give the travelers' first names from settings. If asked again whether it's an AI, say yes.
 - If they object to an automated call, apologize, thank them and end the call.
@@ -176,7 +182,7 @@ Ask the owner which one to use and save it as "Calling method". Both follow the 
 - Ask the park call questions below only if they aren't posted.
 - Never say anything that sounds like accepting a site, even if the office offers to book or hold one.
 - Close with a neutral line, such as: "Thanks, that's helpful. They're still working out other details on the trip, so they'll call back when they're ready to make the reservation."
-- Voicemail: hang up by default. If the owner chose to leave messages, leave one only after a clear beep or a "leave a message" prompt. It opens with the disclosure: "Hi, this is an automated assistant with a message for the office, calling for <first names>…", then the dates, rig and the callback number from settings.
+- Voicemail: hang up by default. If the owner chose to leave messages, leave one only after a clear beep or a "leave a message" prompt. The message gives the dates, rig and the callback number from settings.
 
 ### Always-check items for any park (website first, then ask)
 All on by default. The user can turn any item off or add their own at the first park call; save the choice as "Park call questions". Even for items turned off, ask anyway when pre-call research raises a concern (e.g. posted age limit, short or unlisted sites, tight-site reviews, tricky entrance). Look up enabled items on the park's site and listings before any call. Put answers you find in the call facts. Ask on the call only what isn't posted, and only after they confirm availability:
@@ -187,12 +193,9 @@ All on by default. The user can turn any item off or add their own at the first 
 5. After-hours check-in: how does it work if the office is closed?
 6. Cancellation policy.
 
-### Self-built caller: Twilio + xAI Grok realtime voice — Advanced
-Only if the owner wants it, can run code, and sets up their own accounts. Read `twilio-caller.md` in this skill's folder before any setup or call. Everyone else: use a hosted service or call sheets.
-
 ## Secrets
 
-Store every key the same way: Twilio, xAI, routing services and tile providers. Use the bot's secrets form (masked). Never put keys in chat, memory text, board files or logs. Never print them.
+Store every key the same way: routing services, tile providers and any other API keys. Use the bot's secrets form (masked). Never put keys in chat, memory text, board files or logs. Never print them.
 
 ## Fuel, dump, weather
 
