@@ -1,5 +1,13 @@
 # Changelog
 
+## v9 (2026-11-04)
+Lessons learned from a real trip:
+- Cheaper nearby check (RV trip planning, Go/No-Go Budget): compare parks in the same town or within about 10 mi of the route; flag one at about half the price that fits; record why a pricier park won.
+- Fuel stop sanity (RV trip planning, Go/No-Go Fuel, board spec): no token stops under about 10 gal or 10% of the tank; drop or fill to full; fill in the cheapest-fuel state before long stays and at trip end.
+- Site-fit search (RV trip planning): search length-filtered calendars with the coach or trailer length when the toad can park separately; say which length was searched.
+- Satellite + site-map check (RV trip planning): show a satellite image and the park map, and let the owner pick the site type before tee-up.
+- Vehicle details at setup (Getting started): ask each vehicle's color and license plate too, and save them for reservation forms.
+
 ## v8 (2026-11-01)
 - Built-in monthly self-update: setup creates a "Monthly template update" routine (9 AM on the 1st). It updates only the 4 planner skills, asks first if you edited one, stays quiet when current, and stops with "turn off updates". Replaces the weekly update-check offer.
 - RV trip planning: privacy rule for shared boards; review-reading and stale-sheet pitfalls; 90-day re-check on dated prices; feedback steps now live in getting started.

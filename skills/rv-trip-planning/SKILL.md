@@ -114,6 +114,8 @@ Pick stays in the owner's ranked membership order from settings. Within and afte
 
 Up to 3 options per night. One strong verified option beats three stale listings. Research order per night: membership directories → public parks → private parks.
 
+- **Cheaper nearby check:** before teeing up any paid park, list the other parks in the same town or within about 10 mi of the route, with prices. If one costs about half as much or less and fits the rig, show it first or flag it (e.g. a $75 park when a $35 park in the same town had space). Never quietly pick the pricier one. Record why a paid park won over a cheaper one.
+
 Home and street hosts (driveways, street parking): check the city's posted oversize-vehicle parking rules (some ban large vehicles on posted streets overnight) and the host's rules. Line up a backup.
 
 ## Privacy
@@ -203,6 +205,7 @@ Store every key the same way: routing services, tile providers and any other API
 - Fuel brand preferences (settings): brands to avoid, and preferred stations or cards (e.g. a preferred station chain or a card with fuel rewards). Skip stations that won't take the owner's preferred card if they say so. For diesel rigs, check each station sells diesel and has room for the rig.
 - Diesel rigs: plan DEF for 2010 and newer diesel engines. Blend limits: #2 diesel may legally contain up to 5% biodiesel (B5). Some engines and generators dislike higher blends such as B20, so record the owner's limit as "B5 max", "B20 OK", etc.
 - Fuel cost: only on fill-up rows. Each fill = (tank size − gallons on arrival) × that state's AAA average for the rig's fuel (diesel average for diesel rigs). The board names the price source (AAA state average, or the station's GasBuddy price with its date). Other rows show tank level only. Show a trip total of gallons and cost.
+- Fuel stop sanity: no token stops. If a stop buys under about 10 gal (or under about 10% of the tank), drop it if the arrival reserve stays acceptable, else make it a fill-to-full. Before a long stay or at the trip's end, fill up in the cheapest-diesel (or cheapest-fuel) state on the route.
 - Station vetting: read GasBuddy notes, amenities and recent reviews for diesel blend and big-rig access. Note the GasBuddy price with its date.
 - Visual check (per thoroughness; most important at warehouse clubs and regular stations): satellite view for a drive-through path with no reversing, wide turns and no steep driveway; Street View for canopy height and pump labels (e.g. a B20 pump label). Note the imagery date; ignore old prices in imagery.
 - Dump/water: never exceed the owner's max dry nights or dump cadence. Insert dump stops as needed.
@@ -218,6 +221,8 @@ Never apply a discount the owner doesn't hold (only memberships in settings). In
 - **Stop point:** stop before any button that commits, charges, holds or submits a request, whatever its label ("Reserve", "Confirm", "Complete", "Request", "Book"). Examples: Thousand Trails member reservations and Harvest Hosts stay requests have no pay screen, so their confirm or request button is the commitment. A review page with a saved card can charge on "Reserve".
 - **Never select or use a saved card** or saved payment method. The owner picks payment.
 - **One booking at a time,** while the owner is present. Carts and holds expire, so never batch live carts. Prepare the form data for every stop in advance, then tee up each one in turn. Tell the owner how long the cart is held, if the site says.
+- **Site-fit search:** when a park's online calendar filters by rig length, search with the coach's or trailer's own length (not the whole train) if the owner can unhook and park the toad separately; otherwise shorter sites that fit stay hidden. Use the whole-train length when a pull-through is needed. Tell the owner which length you searched.
+- **Satellite + site map:** before picking a site type, pull a satellite image of the park (e.g. the Esri World Imagery export endpoint, no key needed) and the park's site map if published. Check pad surface, row layout, pull-through vs back-in and tight turns. Show them to the owner and let them choose the site type or range before tee-up. Don't assume the XL or gravel type is better.
 - Wait until the route is settled, unless the owner wants one now or a window is closing.
 - **Booking details:** at the first tee-up, collect what forms need and wasn't asked at setup: phone number, party size (adults/kids), pets, license plates, number of slides, and an address if the form needs it. Store them privately. Confirm them with the owner before each use.
 - Request forms: fill and stop before submit unless approved.

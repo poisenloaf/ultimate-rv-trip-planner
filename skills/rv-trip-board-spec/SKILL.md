@@ -56,7 +56,7 @@ Membership stops use the same statuses. They get a badge, not their own status.
 - **Rating** (only if on): gold stars filled to the score, the score, and the source as sub text.
 - **Hookups / site**: hookups, amps (30 or 50), site type and length, with `UNVERIFIED` when the park lists no length.
 - **Status**: one pill from the status list. Below it, a sub line for availability as of a date, `📝 <note>`, and a blue `→ <next action>`.
-- **Fuel**: on a fill day, `⛽ <Brand> · fill N gal × $X = $Y (<price source>)`, then sub `mi N · arrive N gal [⚠ low] · <exit> · map` and `Backup: <name>`. Otherwise, sub `tank ≈ N gal`.
+- **Fuel**: on a fill day, `⛽ <Brand> · fill N gal × $X = $Y (<price source>)`, then sub `mi N · arrive N gal [⚠ low] · <exit> · map` and `Backup: <name>`. Otherwise, sub `tank ≈ N gal`. No token fuel rows (under about 10 gal): drop the stop or show a fill-to-full.
 - Dry rows have a 3px `#b9a27a` left bar on the Night cell.
 - **Sub-row under each day** (full width, 12px):
   - `☁ Weather`: `hi N° / lo N° · freeze N% of nights · gust ≥<user's wind limit> mph N% of days`, a flag (red if it has ⚠), and the source.
