@@ -4,7 +4,7 @@ description: >-
   Use when building or updating an RV trip board HTML page: layout, statuses,
   colors, map, Go/No-Go strip, day table and settings table. Not for planning
   steps or Go/No-Go checks.
-template_version: 8
+template_version: 9
 ---
 ## Trip board page spec
 

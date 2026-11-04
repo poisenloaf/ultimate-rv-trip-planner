@@ -4,7 +4,7 @@ description: >-
   Use to run the independent GO / NO-GO / HOLD check of an RV trip board: before
   a board is shown, before a booking or early inquiry, at T-minus 7 days, and
   optionally at T-minus 1. Not for building the plan itself.
-template_version: 8
+template_version: 9
 ---
 # Trip Go/No-Go
 

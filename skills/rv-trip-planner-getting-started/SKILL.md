@@ -2,10 +2,10 @@
 name: RV trip planner getting started
 description: >-
   Use on the first run of the RV Trip Planner, or when a required rig or owner setting is missing or unconfirmed, to collect and confirm vehicles, power, pace, fuel, memberships, budget and hookups. Not for trip research.
-template_version: 8
+template_version: 9
 ---
 
-Template version: 8 (2026-11-01)
+Template version: 9 (2026-11-04)
 Template link: https://x.ai/bot/BZr7_j7WC1klRjG8SrwWx
 Bump the Template version (number and date) in the same edit as any change to the RV skills (this one, RV trip planning, RV trip board spec, Trip Go/No-Go). The update check depends on it.
 

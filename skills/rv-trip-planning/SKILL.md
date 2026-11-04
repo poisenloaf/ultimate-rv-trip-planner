@@ -2,7 +2,7 @@
 name: RV trip planning
 description: >-
   Use when planning a multi-day RV trip: paced legs, rig-safe routing, overnight stops by the owner's ranked memberships, live availability, fuel/dump/weather, a trip board, inquiry drafts, and booking tee-up that stops before anything commits or charges. Not for single-site availability watchers or non-RV travel.
-template_version: 8
+template_version: 9
 ---
 
 # RV trip planning
